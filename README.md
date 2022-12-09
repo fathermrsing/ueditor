@@ -1,109 +1,36 @@
-Get Started
-=====
+# ueditor
+ueditor百度富文本编辑器，针对原有的功能进行操作优化及新增功能扩展。
+<br/>
+优化后的效果，基本能满足企业内IT办公系统用户的基本操作要求。
 
-> 鉴于目前 ISSUE 较多而维护时间较少，且在进行后续的版本更新，目前暂时关闭 ISSUE，若社区有人跟进，欢迎和我们联系。重复的问题，请参阅常见问题的 [FAQ Wiki](https://github.com/fex-team/ueditor/wiki/FAQ)。
+## Demo
+<ul>
+  <li>先上demo <a href="https://qinpeifeng.github.io/ueditor/index.html" target="_blank" rel="noopener noreferrer">ueditor online demo</a></li>
+</ul>
 
-## 重要安全通告：
+## 一、操作体验优化
+### 表格
+<ul>
+  <li>优化了列宽不好拖拽功能（相比原来的拖拽功能，有了很大的提升）</li>
+  <li>优化了表格粘贴后自动调整列宽，导致格式列宽与原来变得不一致问题</li>
+  <li>优化了单元格内的文字有时无法调整对齐方式问题</li>
+</ul>
 
-1. commons-fileupload-1.3.1.jar 存在漏洞可能会导致 ddos，源代码中已经修改，使用老版本的用户，强烈推荐升级 commons-fileupload.jar 至最新版本。（2018-04-09）.
-2. UEditor 所提供的所有后端代码都仅为 DEMO 作用，切不可直接使用到生产环境中，目前已知 php 的代码会存在 ssrf 的安全漏洞。修复方式：使用最新的 Uploader.class [code](https://github.com/fex-team/ueditor/blob/dev-1.5.0/php/Uploader.class.php) .
+### 文字编辑
+<ul>
+  <li>优化了全选文字调整字体、颜色、大小后，部分内容文字偶尔不生效问题</li>
+  <li>优化了文字偶尔无法加粗，去除加粗问题</li>
+</ul>
 
-## ueditor富文本编辑器介绍
+## 二、新增功能扩展
+### 从Excel粘贴到ueditor
+<ul>
+  <li>优化前，从Excel复制内容粘贴到uediotr后，无法保留在Excel中的颜色，列宽等问题</li>
+  <li>优化后，能完整保留从Excel复制粘贴到uediotr的内容及格式，基本与在Excel中的内容格式一致</li>
+</ul>
 
-UEditor是由百度web前端研发部开发所见即所得富文本web编辑器，具有轻量，可定制，注重用户体验等特点，开源基于MIT协议，允许自由使用和修改代码。
 
-## 1 入门部署和体验
-
-### 1.1 下载编辑器
-
-1. `git clone ` 仓库
-2. `npm install` 安装依赖（如果没有安装 grunt , 请先在全局安装 grunt）
-3. 在终端执行 `grunt default`
-
-### 1.2 创建demo文件
-解压下载的包，在解压后的目录创建demo.html文件，填入下面的html代码
-
-```html
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<title>ueditor demo</title>
-</head>
-<body>
-	<!-- 加载编辑器的容器 -->
-	<script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
-	<!-- 配置文件 -->
-	<script type="text/javascript" src="ueditor.config.js"></script>
-	<!-- 编辑器源码文件 -->
-	<script type="text/javascript" src="ueditor.all.js"></script>
-	<!-- 实例化编辑器 -->
-	<script type="text/javascript">
-	    var ue = UE.getEditor('container');
-	</script>
-</body>
-</html>
-```
-
-### 1.3 在浏览器打开demo.html
-
-如果看到了下面这样的编辑器，恭喜你，初次部署成功！
-
-![部署成功](http://fex.baidu.com/ueditor/doc/images/demo.png)
-
-### 1.4 传入自定义的参数
-
-编辑器有很多可自定义的参数项，在实例化的时候可以传入给编辑器：
-```javascript
-var ue = UE.getEditor('container', {
-    autoHeight: false
-});
-```
-
-配置项也可以通过ueditor.config.js文件修改，具体的配置方法请看[前端配置项说明](http://fex.baidu.com/ueditor/#start-config1.4 前端配置项说明.md)
-
-### 1.5 设置和读取编辑器的内容
-
-通getContent和setContent方法可以设置和读取编辑器的内容
-```javascript
-var ue = UE.getEditor();
-//对编辑器的操作最好在编辑器ready之后再做
-ue.ready(function(){
-    //设置编辑器的内容
-    ue.setContent('hello');
-    //获取html内容，返回: <p>hello</p>
-    var html = ue.getContent();
-    //获取纯文本内容，返回: hello
-    var txt = ue.getContentTxt();
-});
-```
-
-ueditor的更多API请看[API 文档](http://ueditor.baidu.com/doc "ueditor API 文档")
-
-### 1.6 dev-1.5.0 版本二次开发自定义插件注意事项
-
-dev-1.5.0版对于插件的加载逻辑进行了调整，但官网对应的[二次开发功能文档](http://fex.baidu.com/ueditor/#dev-developer)未对相应调整做出开发细节说明，现补充如下：
-
-除进行原有配置外，还需在实例化ueditor编辑器时在 toolbars 参数数组中，加入自定义插件的 uiname，并且注意uiname必须小写，方可正确加载自定义插件。 
-
-## 2 详细文档
-
-ueditor 官网：[http://ueditor.baidu.com](http://ueditor.baidu.com "ueditor 官网")
-
-ueditor API 文档：[http://ueditor.baidu.com/doc](http://ueditor.baidu.com/doc "ueditor API 文档")
-
-ueditor github 地址：[http://github.com/fex-team/ueditor](http://github.com/fex-team/ueditor "ueditor github 地址")
-
-ueditor 第三方插件贡献 wiki : [第三方插件贡献规范](http://ueditor.baidu.com/website/thirdproject.html)
-
-ueditor 贡献代码规范（javascript）： [javascript规范](https://github.com/fex-team/styleguide/blob/master/javascript.md)
-
-## 3 第三方贡献
-
-ueditor for nodejs 参考[https://github.com/netpi/ueditor](https://github.com/netpi/ueditor)
-
-## 4 联系我们
-
-email：[ueditor@baidu.com](mailto://email:ueditor@baidu.com "发邮件给ueditor开发组")
-
-issue：[github issue](http://github.com/fex-team/ueditor/issues "ueditor 论坛")
+## Contacts
+如果对你有所帮助，请动动小手点下star
+<br/>
+如果有问题及交流，请发email:332039533@qq.com
